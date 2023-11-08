@@ -1,0 +1,26 @@
+{
+    "time": {
+        "when": "2023-12-01T01:01:01+01:00"
+    },
+    "subject": {
+        "kind": "user",
+        "id": "user_id",
+        "agent": {
+            "client": "jsClient",
+            "version": "v1.0.0",
+            "session": "jti_or_session_id"
+        }
+    },
+    "action": {
+        "kind": "informative",
+        "operation": "getPersonalInfo",
+        "status": {
+            "result": "succeeded",
+            "code": 0
+        }
+    },
+    "target": {
+        "kind": "urn:my-company-name:pim:user",
+        "id": "user_id"
+    }
+}

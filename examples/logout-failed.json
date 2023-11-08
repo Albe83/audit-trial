@@ -1,0 +1,26 @@
+{
+    "time": {
+        "when": "2023-12-01T01:01:01+01:00"
+    },
+    "subject": {
+        "kind": "user",
+        "id": "user_id",
+        "agent": {
+            "client": "jsClient",
+            "version": "v1.0.0"
+        }
+    },
+    "action": {
+        "kind": "dispositive",
+        "operation": "logout",
+        "status": {
+            "result": "failed",
+            "code": 100,
+            "reason": "session no exists"
+        }
+    },
+    "target": {
+        "kind": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        "id": "jws_id_identify_user_session"
+    }
+}
