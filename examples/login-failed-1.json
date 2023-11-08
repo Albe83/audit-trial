@@ -1,0 +1,22 @@
+{
+    "time": {
+        "when": "2023-12-01T01:01:01+01:00"
+    },
+    "subject": {
+        "kind": "user",
+        "id": "user_id",
+        "agent": {
+            "client": "jsClient",
+            "version": "v1.0.0"
+        }
+    },
+    "action": {
+        "kind": "dispositive",
+        "operation": "login",
+        "status": {
+            "result": "failed",
+            "code": 1,
+            "reason": "invalid password"
+        }
+    }
+}
