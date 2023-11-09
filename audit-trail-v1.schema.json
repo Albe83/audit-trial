@@ -1,93 +1,92 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://guidelines.sisal.cloudnative.apps/audit-trail-v1.schema.json",
+    "$id": "https://albe83.github.com/v1/audit-trail.schema.json",
     "title": "Audit Trails",
-    "description": "An audit trail is a security relevant chronological record that provide documentary evidence of the sequence of activities that have affected a specific system.",
+    "description": "An audit trail is a security-relevant chronological record providing documentary evidence of the sequence of activities that have affected a specific system.",
     "type": "object",
     "properties": {
         "time": {
             "type": "object",
-            "description": "Temporal informations about when an activity is happen.",
+            "description": "Temporal information about when an activity occurred.",
             "properties": {
                 "when": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "When the activity occurred."
+                    "description": "Timestamp when the activity occurred in ISO 8601 format. Example: '2023-11-09T14:30:00Z'."
                 },
                 "duration": {
                     "type": "string",
                     "format": "duration",
-                    "description": "(Optional) How long the activity will produce effects."
+                    "description": "(Optional) Duration of the activity in ISO 8601 duration format (e.g., 'PT2H30M' for 2 hours and 30 minutes)."
                 }
             },
             "required": ["when"]
         },
         "subject": {
             "type": "object",
-            "description": "Functional user who performed the task.",
+            "description": "Functional user or system that performed the task.",
             "properties": {
                 "kind": {
                     "enum": ["user", "machine", "system", "other"],
-                    "description": "Type of user. The value \"system\" define an internal action."
+                    "description": "Type of the user or system. 'system' defines an internal action."
                 },
                 "id": {
                     "type": "string",
-                    "description": "Unique identifier of the actor. If \"kind\" value is \"system\" id should be identify which part of system have started activity."
+                    "description": "Unique identifier of the actor. If 'kind' is 'system', 'id' should identify which part of the system initiated the activity."
                 },
                 "agent": {
                     "type": ["string", "object"],
-                    "description": "(Optional) Software or tool used by Subject to act."
+                    "description": "(Optional) Software or tool used by the subject to perform the action."
                 }
             },
             "required": ["kind", "id"]
         },
         "action": {
             "type": "object",
-            "description": "Describe action done by Subject.",
+            "description": "Describes the action performed by the subject.",
             "properties": {
                 "kind": {
                     "enum": ["dispositive", "informative"],
-                    "description": "Action is \"Dispositive\" when change functional state, or \"Informative\" when access to functional state."
+                    "description": "The type of action: 'dispositive' when changing the functional state or 'informative' when accessing the functional state."
                 },
                 "operation": {
                     "type": "string",
-                    "description": ""
+                    "description": "Description of the specific action or operation performed (e.g., 'Update Profile', 'Access Report')."
                 },
                 "status": {
                     "type": "object",
-                    "description": "",
+                    "description": "Status of the action.",
                     "properties": {
                         "result": {
                             "enum": ["succeeded", "failed"],
-                            "description": ""
+                            "description": "The result of the action: 'succeeded' or 'failed'."
                         },
                         "code": {
                             "type": "integer",
-                            "description": ""
+                            "description": "(Optional) Numeric error code, if applicable."
                         },
                         "reason": {
                             "type": "string",
-                            "description": "",
-                            "maxLength": 25
+                            "description": "(Optional) Human-readable reason for the result. Limited to 25 characters."
                         }
                     },
                     "required": ["result"]
                 },
                 "changes": {
                     "type": "array",
-                    "description": "",
+                    "description": "(Optional) Details of changes made during the action.",
                     "items": {
                         "type": "object",
                         "properties": {
                             "param": {
                                 "type": "string",
-                                "description": ""
+                                "description": "Name of the parameter or attribute that was changed."
                             },
                             "oldValue": {
-                                "description": ""
+                                "description": "(Optional) The previous value of the parameter."
                             },
                             "newValue": {
-                                "description": ""
+                                "description": "(Optional) The new value of the parameter."
                             }
                         }
                     }
@@ -97,18 +96,18 @@
         },
         "target": {
             "type": "object",
-            "description": "",
+            "description": "Describes the target or resource affected by the action.",
             "properties": {
                 "kind": {
                     "type": "string",
-                    "pattern": "^urn:[a-z0-9]+[a-z0-9-_:]*[a-z0-9]+[a-z0-9-_]$",
-                    "description": "URN-like resource type description."
+                    "pattern": "^urn:[a-zA-Z0-9-]+:[a-zA-Z0-9()+,;.=@%-][a-zA-Z0-9()+,;.=@%-]{0,63}(:[a-zA-Z0-9()+,;@&=;$%-][a-zA-Z0-9()+,;@&=;$%-]{0,255})?$",
+                    "description": "URN-like resource type description (e.g., 'urn:app/user')."
                 },
                 "id": {
                     "type": ["string", "integer"],
                     "minimum": 0,
                     "minLength": 1,
-                    "description": "Resource identifier."
+                    "description": "Resource identifier (e.g., '12345')."
                 }
             },
             "required": ["kind", "id"]
