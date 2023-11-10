@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://albe83.github.com/v1/audit-trail.schema.json",
-    "title": "Audit Trails",
+    "$id": "https://albe83.github.com/audit-trail/v1/schema.json",
+    "title": "Audit Trail",
     "description": "An audit trail is a security-relevant chronological record providing documentary evidence of the sequence of activities that have affected a specific system.",
     "type": "object",
     "properties": {
