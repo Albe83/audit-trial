@@ -96,7 +96,7 @@
         },
         "targets": {
             "type": ["array", "null"],
-            "description": "",
+            "description": "Describes the targets or resources affected by the action.",
             "items": {
                 "type": "object",
                 "description": "Describes the target or resource affected by the action.",
